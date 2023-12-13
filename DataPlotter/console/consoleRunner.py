@@ -1,5 +1,6 @@
 import PySimpleGUI as psg
-from data_processing import processorAPI as api
+from data_processing import processorAPI
+import console.popUpManager as popUp
 
 
 def runner():
@@ -9,10 +10,8 @@ def runner():
                         expand_x=True,
                         justification='center')],
               ]
+    popUp.welcomePopUp()
     window = psg.Window('HelloWorld', layout, size=(700, 700))
-    file = open("utils/OpenPopUpText.txt", "r")
-    text = file.read()
-    psg.popup_scrolled(text, title="Scrolled Popup", font=("Arial Bold", 16), size=(70, 10))
     while True:
         event, values = window.read()
         print(event, values)

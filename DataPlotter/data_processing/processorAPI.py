@@ -1,6 +1,6 @@
-from PointCollection import PointCollection as pc
-from line import Line
-from DTM import DTM
+from data_processing.PointCollection import PointCollection as pc
+from data_processing.line import Line
+from data_processing.DTM import DTM
 
 
 class ProcessorAPI:
