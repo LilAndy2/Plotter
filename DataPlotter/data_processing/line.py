@@ -79,3 +79,22 @@ class Line(PointCollection):
             errors.append(self.__getPolyFitError__())
 
         self.__setPolyFit__(np.argmin(errors))
+
+    def __getPolyFitIntegral__(self, a, b, numParts):
+        # calculate the integral of the polynomial function
+        # break the interval into numParts parts
+        # use the trapezoidal rule
+        integral = 0
+        for i in range(numParts):
+            integral += (self.__extrapolate__(a + i * (b - a) / numParts).y +
+                         self.__extrapolate__(a + (i + 1) * (b - a) / numParts).y) * (b - a) / numParts / 2
+
+        return integral
+
+    def __getPolyFitDerivative__(self, x):
+        # calculate the derivative of the polynomial function
+        derivative = 0
+        for i in range(1, len(self.polyFitIndices)):
+            derivative += i * self.polyFitIndices[i] * x ** (i - 1)
+
+        return derivative
