@@ -5,8 +5,8 @@ from data_processing.point import Point
 
 
 class PointCollection:
-    def __init__(self):
-        self.points = []
+    def __init__(self, points):
+        self.points = points
 
     def __str__(self):
         return f'PointCollection({self.points})'
@@ -16,6 +16,9 @@ class PointCollection:
 
     def __addPoints__(self, points):
         self.points.extend(points)
+
+    def __removePoint__(self, point):
+        self.points.remove(point)
 
     def __len__(self):
         return len(self.points)
@@ -34,3 +37,20 @@ class PointCollection:
 
     def __intersect__(self, other):
         return [point for point in self.points if point in other.points]
+
+    def __addTuples__(self, tuples):
+        self.points.extend([Point(t[0], t[1]) for t in tuples])
+
+    def __integrate__(self):
+        # integrate the points using the trapezoidal rule
+        integral = 0
+        for i in range(len(self.points) - 1):
+            integral += ((self.points[i].y + self.points[i + 1].y) *
+                         (self.points[i + 1].x - self.points[i].x) / 2)
+        return integral
+
+    def __setPolyFit__(self, i):
+        pass
+
+    def __getPolyFit__(self):
+        return None

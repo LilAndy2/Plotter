@@ -7,8 +7,7 @@ from data_processing.PointCollection import PointCollection
 
 class Line(PointCollection):
     def __init__(self, points):
-        super().__init__()
-        self.points = points
+        super().__init__(points)
         self.polyFitIndices = np.zeros(10)
 
     def __str__(self):
@@ -98,3 +97,9 @@ class Line(PointCollection):
             derivative += i * self.polyFitIndices[i] * x ** (i - 1)
 
         return derivative
+
+    def __integrate__(self):
+        return self.__getPolyFitIntegral__(self.points[0].x, self.points[-1].x, 1000)
+
+    def __differentiate__(self, x):
+        return self.__getPolyFitDerivative__(x)
