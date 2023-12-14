@@ -4,8 +4,8 @@ from data_processing.DTM import DTM
 
 
 class ProcessorAPI:
-    def __init__(self, PC):
-        self.pointCollection = PC
+    def __init__(self):
+        self.pointCollection = pc([])
         self.mode = 'none'
 
     def __str__(self):

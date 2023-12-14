@@ -22,6 +22,7 @@ def runner():
               ]
     popUp.welcomePopUp()
     window = psg.Window('HelloWorld', layout, size=(700, 700))
+    processor = ProcessorAPI()
     while True:
         event, values = window.read()
         print(event, values)

@@ -25,7 +25,7 @@ def addPointPopUp():
     return None
 
 
-def integralPopUp():
+def integralPopUp(processor):
     psg.set_options(font=('Arial Bold', 16))
     layout = [
         [psg.Text('Left Bound: ', size=(10, 1)), psg.Input(expand_x=True)],
@@ -38,6 +38,5 @@ def integralPopUp():
     print(event, values)
     window.close()
     if event == 'OK':
-        processor = ProcessorAPI([])
         return processor.integrate(values[0], values[1], values[2])
     return None
