@@ -41,14 +41,6 @@ class PointCollection:
     def __addTuples__(self, tuples):
         self.points.extend([Point(t[0], t[1]) for t in tuples])
 
-    def __integrate__(self):
-        # integrate the points using the trapezoidal rule
-        integral = 0
-        for i in range(len(self.points) - 1):
-            integral += ((self.points[i].y + self.points[i + 1].y) *
-                         (self.points[i + 1].x - self.points[i].x) / 2)
-        return integral
-
     def __setPolyFit__(self, i):
         pass
 

@@ -34,4 +34,3 @@ class DTM(PointCollection):
         next_point = regressor.predict([[len(self.points)]])[0]
 
         return Point(next_point[0], next_point[1])
-

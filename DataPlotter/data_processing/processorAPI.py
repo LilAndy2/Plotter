@@ -4,8 +4,8 @@ from data_processing.DTM import DTM
 
 
 class ProcessorAPI:
-    def __init__(self):
-        self.pointCollection = pc()
+    def __init__(self, PC):
+        self.pointCollection = PC
         self.mode = 'none'
 
     def __str__(self):
@@ -74,8 +74,14 @@ class ProcessorAPI:
         else:
             raise ValueError('Invalid mode')
 
-    def integrate(self):
-        return self.pointCollection.__integrate__()
+    def integrate(self, left, right, accuracy):
+        self.pointCollection = Line(self.pointCollection.points)
+        if accuracy == "rough":
+            return self.pointCollection.__integrate__(left, right, self.pointCollection.points.length)
+        if accuracy == "medium":
+            return self.pointCollection.__integrate__(left, right, self.pointCollection.points.length * 10)
+        if accuracy == "precise":
+            return self.pointCollection.__integrate__(left, right, self.pointCollection.points.length * 100)
 
     def differentiate(self, x):
         if self.mode == 'line':

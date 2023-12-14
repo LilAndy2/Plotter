@@ -85,8 +85,9 @@ class Line(PointCollection):
         # use the trapezoidal rule
         integral = 0
         for i in range(numParts):
-            integral += (self.__extrapolate__(a + i * (b - a) / numParts).y +
-                         self.__extrapolate__(a + (i + 1) * (b - a) / numParts).y) * (b - a) / numParts / 2
+            integral += ((self.__extrapolate__(a + i * (b - a) / numParts).y +
+                         self.__extrapolate__(a + (i + 1) * (b - a) / numParts).y) *
+                         (b - a) / numParts / 2)
 
         return integral
 
@@ -98,8 +99,8 @@ class Line(PointCollection):
 
         return derivative
 
-    def __integrate__(self):
-        return self.__getPolyFitIntegral__(self.points[0].x, self.points[-1].x, 1000)
+    def __integrate__(self, left, right, num_parts):
+        return self.__getPolyFitIntegral__(left, right, num_parts)
 
     def __differentiate__(self, x):
         return self.__getPolyFitDerivative__(x)
