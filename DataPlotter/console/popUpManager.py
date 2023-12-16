@@ -72,7 +72,7 @@ def addPointPopUp():
         updatePlot()
 
 
-    popup_window.close()
+        popup_window.close()
 
         return point
 
@@ -93,7 +93,11 @@ def removePointPopUp():
     if event == 'OK':
         x, y = float(values[0]), float(values[1])
         point = Point(x, y)
-        puncte.remove(point)
+        if point in puncte:
+             puncte.remove(point)
+        else:
+            print("punct inexistent")
+            return None
 
         # Actualizare și afișare grafic în timp real
         updatePlot()
