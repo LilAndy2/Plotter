@@ -34,6 +34,9 @@ def addPointPopUp_from_button():
     # Funcția care va fi apelată la apăsarea butonului "Button One"
     popUp.addPointPopUp()
 
+def removePointPopUp_from_button():
+    popUp.removePointPopUp()
+
 def runner():
     # Definirea aspectului ferestrei cu un element Text și un buton
     layout = [
@@ -68,6 +71,8 @@ def runner():
         elif event == '-BUTTON_ONE-':
             # Apelarea funcției când este apăsat butonul "Button One"
             addPointPopUp_from_button()
+        elif event == '-BUTTON_TWO':
+            removePointPopUp_from_button()
 
     # Închiderea ferestrei la finalul buclei
     window.close()
