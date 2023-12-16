@@ -34,6 +34,7 @@ def runner():
                         justification='center')],
               ]
     popUp.welcomePopUp()
+    popUp.addPointPopUp()
     window = psg.Window('HelloWorld', layout, size=(700, 700))
     processor = ProcessorAPI()
     while True:

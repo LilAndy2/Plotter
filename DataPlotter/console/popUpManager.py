@@ -18,10 +18,36 @@ def addPointPopUp():
     ]
     window = psg.Window('Form', layout, size=(200, 200))
     event, values = window.read()
-    print(event, values)
     window.close()
+
     if event == 'OK':
-        return Point(values[0], values[1])
+        x, y = float(values[0]), float(values[1])
+        point = Point(x, y)
+
+        # Creare sistem de axe și adăugare punct
+        fig, ax = plt.subplots()
+        ax.scatter(point.x, point.y, color='red', marker='o', label='Punct')
+
+        # Adăugare detalii axelor, etichetelor etc.
+        ax.set_title('Reprezentarea unui Punct')
+        ax.set_xlabel('Coordonata X')
+        ax.set_ylabel('Coordonata Y')
+
+        # Adăugare rețea pe axă
+        ax.grid(True)
+
+        # Adăugare legendă
+        ax.legend()
+
+        # Afișare grafic în fereastră
+        fig_canvas = FigureCanvasTkAgg(fig, master=plt.gcf())
+        widget_canvas = fig_canvas.get_tk_widget()
+        widget_canvas.pack()
+
+        plt.show()
+
+        return point
+
     return None
 
 
