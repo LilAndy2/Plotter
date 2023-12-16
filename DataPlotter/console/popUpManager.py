@@ -28,6 +28,7 @@ def addPointPopUp():
 def integralPopUp(processor):
     psg.set_options(font=('Arial Bold', 16))
     layout = [
+        #[psg.Button("Add / Remove points"), psg.Button("Calculate integral / derivative")],
         [psg.Text('Left Bound: ', size=(10, 1)), psg.Input(expand_x=True)],
         [psg.Text('Right Bound: ', size=(10, 1)), psg.Input(expand_x=True)],
         [psg.Text('Accuracy: ', size=(10, 1)), psg.Input(expand_x=True)],
