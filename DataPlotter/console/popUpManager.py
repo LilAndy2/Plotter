@@ -1,6 +1,7 @@
 import PySimpleGUI as psg
 from data_processing.point import Point
 from data_processing.processorAPI import ProcessorAPI
+from matplotlib import pyplot as plt
 
 
 def welcomePopUp():
@@ -40,14 +41,13 @@ def addPointPopUp():
         ax.legend()
 
         # Afișare grafic în fereastră
-        fig_canvas = FigureCanvasTkAgg(fig, master=plt.gcf())
-        widget_canvas = fig_canvas.get_tk_widget()
-        widget_canvas.pack()
+        #fig_canvas = FigureCanvasTkAgg(fig, master=plt.gcf())
+        #widget_canvas = fig_canvas.get_tk_widget()
+        #widget_canvas.pack()
 
         plt.show()
 
         return point
-
     return None
 
 
