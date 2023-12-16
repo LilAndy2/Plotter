@@ -26,20 +26,44 @@ import console.popUpManager as popUp
 # - when mode is line, display the points and the polynomial function
 # - when mode is dtm, display the points
 
-def runner():
-    layout = [[psg.Text(text='Hello World',
-                        font=('Arial Bold', 20),
-                        size=20,
-                        expand_x=True,
-                        justification='center')],
-              ]
-    popUp.welcomePopUp()
+import PySimpleGUI as psg
+from data_processing.processorAPI import ProcessorAPI
+import console.popUpManager as popUp
+
+def addPointPopUp_from_button():
+    # Funcția care va fi apelată la apăsarea butonului "Button One"
     popUp.addPointPopUp()
+
+def runner():
+    # Definirea aspectului ferestrei cu un element Text și un buton
+    layout = [
+        [psg.Text(text='Hello World',
+                  font=('Arial Bold', 20),
+                  size=20,
+                  expand_x=True,
+                  justification='center')],
+        [psg.Button('Add Point', key='-BUTTON_ONE-')],
+    ]
+
+    # Crearea ferestrei PySimpleGUI
     window = psg.Window('HelloWorld', layout, size=(700, 700))
+
+    # Crearea unei instanțe ProcessorAPI
     processor = ProcessorAPI()
+
+    # Bucla principală de evenimente
     while True:
         event, values = window.read()
-        print(event, values)
+
         if event in (None, 'Exit'):
             break
+        elif event == '-BUTTON_ONE-':
+            # Apelarea funcției când este apăsat butonul "Button One"
+            addPointPopUp_from_button()
+
+    # Închiderea ferestrei la finalul buclei
     window.close()
+
+if __name__ == '__main__':
+    runner()
+
