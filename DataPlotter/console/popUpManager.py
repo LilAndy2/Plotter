@@ -10,6 +10,30 @@ def welcomePopUp():
     psg.popup_scrolled(text, title="Scrolled Popup", font=("Arial Bold", 16), size=(70, 10))
 
 
+def updatePlot():
+    fig, ax = plt.subplots()
+    for p in puncte:
+        ax.scatter(p.x, p.y, color='red', marker='o', label='Punct')
+
+    # Adăugare detalii axelor, etichetelor etc.
+    ax.set_title('Reprezentarea Punctelor')
+    ax.set_xlabel('Coordonata X')
+    ax.set_ylabel('Coordonata Y')
+
+    # Adăugare rețea pe axă
+    ax.grid(True)
+
+    # Adăugare legendă
+    ax.legend()
+
+    # Salvare imagine PNG
+    plt.savefig('grafic.png')
+
+    # Afișare grafic în fereastră
+    plt.show()
+
+puncte = []
+
 def addPointPopUp():
     psg.set_options(font=('Arial Bold', 16))
     layout = [
@@ -24,32 +48,14 @@ def addPointPopUp():
     if event == 'OK':
         x, y = float(values[0]), float(values[1])
         point = Point(x, y)
+        puncte.append(point)
 
-        # Creare sistem de axe și adăugare punct
-        fig, ax = plt.subplots()
-        ax.scatter(point.x, point.y, color='red', marker='o', label='Punct')
-
-        # Adăugare detalii axelor, etichetelor etc.
-        ax.set_title('Reprezentarea unui Punct')
-        ax.set_xlabel('Coordonata X')
-        ax.set_ylabel('Coordonata Y')
-
-        # Adăugare rețea pe axă
-        ax.grid(True)
-
-        # Adăugare legendă
-        ax.legend()
-
-        # Afișare grafic în fereastră
-        #fig_canvas = FigureCanvasTkAgg(fig, master=plt.gcf())
-        #widget_canvas = fig_canvas.get_tk_widget()
-        #widget_canvas.pack()
-
-        plt.show()
+        # Actualizare și afișare grafic în timp real
+        updatePlot()
 
         return point
-    return None
 
+    return None
 
 def integralPopUp(processor):
     psg.set_options(font=('Arial Bold', 16))
