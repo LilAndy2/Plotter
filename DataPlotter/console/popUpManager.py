@@ -34,7 +34,7 @@ def updatePlot():
 
 puncte = []
 
-def addPointPopUp():
+'''def addPointPopUp():
     psg.set_options(font=('Arial Bold', 16))
     layout = [
         [psg.Text('X ', size=(10, 1)), psg.Input(expand_x=True)],
@@ -55,7 +55,26 @@ def addPointPopUp():
 
         return point
 
-    return None
+    return None'''
+def addPointPopUp(window):
+    psg.set_options(font=('Arial Bold', 16))
+    layout = [
+        [psg.Text('X ', size=(10, 1)), psg.Input(expand_x=True)],
+        [psg.Text('Y ', size=(10, 1)), psg.Input(expand_x=True)],
+        [psg.OK(), psg.Cancel()]
+    ]
+    popup_window = psg.Window('Add Point', layout, size=(200, 200))
+    event, values = popup_window.read()
+
+    if event == 'OK':
+        x, y = float(values[0]), float(values[1])
+        point = Point(x, y)
+        puncte.append(point)
+
+        # Actualizați și afișați graficul în timp real în fereastra principală
+        updatePlot()
+
+    popup_window.close()
 
 def integralPopUp(processor):
     psg.set_options(font=('Arial Bold', 16))
