@@ -2,6 +2,7 @@ import PySimpleGUI as psg
 from data_processing.point import Point
 from data_processing.processorAPI import ProcessorAPI
 from matplotlib import pyplot as plt
+import os
 
 
 def welcomePopUp():
@@ -9,11 +10,25 @@ def welcomePopUp():
     text = file.read()
     psg.popup_scrolled(text, title="Scrolled Popup", font=("Arial Bold", 16), size=(70, 10))
 
+puncte = []
+
+# Numele fișierului PNG
+nume_fisier_png = 'grafic.png'
+
+# Variabilă pentru a ține evidența dacă legenda a fost deja adăugată
+legenda_adaugata = False
 
 def updatePlot():
+    global legenda_adaugata
     fig, ax = plt.subplots()
+
+    # Adăugare toate punctele existente
     for p in puncte:
         ax.scatter(p.x, p.y, color='red', marker='o', label='Punct')
+
+    #canvas = FigureCanvasTkAgg(figure, window['-CANVAS-'].Widget)
+    #canvas.draw()
+    #canvas.get_tk_widget().pack(side='top', fill='both', expand=1)
 
     # Adăugare detalii axelor, etichetelor etc.
     ax.set_title('Reprezentarea Punctelor')
@@ -23,40 +38,22 @@ def updatePlot():
     # Adăugare rețea pe axă
     ax.grid(True)
 
-    # Adăugare legendă
-    ax.legend()
+    # Salvare și actualizare imagine PNG
+    plt.savefig(nume_fisier_png)
+    plt.draw()
 
-    # Salvare imagine PNG
-    plt.savefig('grafic.png')
+    # Adăugare legenda (doar dacă nu a fost deja adăugată)
+    if not legenda_adaugata:
+        ax.legend()
+        legenda_adaugata = True
 
     # Afișare grafic în fereastră
     plt.show()
 
+
 puncte = []
 
-'''def addPointPopUp():
-    psg.set_options(font=('Arial Bold', 16))
-    layout = [
-        [psg.Text('X ', size=(10, 1)), psg.Input(expand_x=True)],
-        [psg.Text('Y ', size=(10, 1)), psg.Input(expand_x=True)],
-        [psg.OK(), psg.Cancel()]
-    ]
-    window = psg.Window('Form', layout, size=(200, 200))
-    event, values = window.read()
-    window.close()
-
-    if event == 'OK':
-        x, y = float(values[0]), float(values[1])
-        point = Point(x, y)
-        puncte.append(point)
-
-        # Actualizare și afișare grafic în timp real
-        updatePlot()
-
-        return point
-
-    return None'''
-def addPointPopUp(window):
+def addPointPopUp():
     psg.set_options(font=('Arial Bold', 16))
     layout = [
         [psg.Text('X ', size=(10, 1)), psg.Input(expand_x=True)],

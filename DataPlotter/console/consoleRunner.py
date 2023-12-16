@@ -30,9 +30,9 @@ import PySimpleGUI as psg
 from data_processing.processorAPI import ProcessorAPI
 import console.popUpManager as popUp
 
-def addPointPopUp_from_button(window):
+def addPointPopUp_from_button():
     # Funcția care va fi apelată la apăsarea butonului "Button One"
-    popUp.addPointPopUp(window)
+    popUp.addPointPopUp()
 
 def removePointPopUp_from_button():
     # Funcția care va fi apelată la apăsarea butonului "Button Two"
@@ -71,7 +71,7 @@ def runner():
             break
         elif event == '-BUTTON_ONE-':
             # Apelarea funcției când este apăsat butonul "Button One"
-            addPointPopUp_from_button(window)
+            addPointPopUp_from_button()
         elif event == '-BUTTON_TWO-':
             # Apelarea funcției când este apăsat butonul "Button Two"
             removePointPopUp_from_button()
