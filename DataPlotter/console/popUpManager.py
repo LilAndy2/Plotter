@@ -71,7 +71,36 @@ def addPointPopUp():
         # Actualizați și afișați graficul în timp real în fereastra principală
         updatePlot()
 
+
     popup_window.close()
+
+        return point
+
+    return None
+
+def removePointPopUp():
+    global puncte  # Declară variabila puncte ca fiind globală pentru a o putea modifica în funcție
+    psg.set_options(font=('Arial Bold', 16))
+    layout = [
+        [psg.Text('X ', size=(10, 1)), psg.Input(expand_x=True)],
+        [psg.Text('Y ', size=(10, 1)), psg.Input(expand_x=True)],
+        [psg.OK(), psg.Cancel()]
+    ]
+    window = psg.Window('Form', layout, size=(200, 200))
+    event, values = window.read()
+    window.close()
+
+    if event == 'OK':
+        x, y = float(values[0]), float(values[1])
+        point = Point(x, y)
+        puncte.remove(point)
+
+        # Actualizare și afișare grafic în timp real
+        updatePlot()
+
+        return point
+
+    return None
 
 def integralPopUp(processor):
     psg.set_options(font=('Arial Bold', 16))

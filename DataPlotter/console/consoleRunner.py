@@ -72,8 +72,7 @@ def runner():
         elif event == '-BUTTON_ONE-':
             # Apelarea funcției când este apăsat butonul "Button One"
             addPointPopUp_from_button()
-        elif event == '-BUTTON_TWO-':
-            # Apelarea funcției când este apăsat butonul "Button Two"
+        elif event == '-BUTTON_TWO':
             removePointPopUp_from_button()
 
     # Închiderea ferestrei la finalul buclei
