@@ -43,6 +43,13 @@ def runner():
                   expand_x=True,
                   justification='center')],
         [psg.Button('Add Point', key='-BUTTON_ONE-')],
+        [psg.Button('Remove Point', key='-BUTTON_TWO')],
+        [psg.Button('Calculate Integral', key='BUTTON_THREE')],
+        [psg.Button('Calculate derivative', key='BUTTON_FOUR')],
+        [psg.Button('Linear Regression', key='BUTTON_FIVE')],
+        [psg.Button('Next Predicted Point', key='-BUTTON_SIX')],
+        [psg.Button('Extrapolate Point', key='BUTTON_SEVEN')],
+        [psg.Button('Display Dataset', key='-BUTTON_EIGHT')]
     ]
     popUp.welcomePopUp()
 
