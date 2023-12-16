@@ -44,6 +44,7 @@ def runner():
                   justification='center')],
         [psg.Button('Add Point', key='-BUTTON_ONE-')],
     ]
+    popUp.welcomePopUp()
 
     # Crearea ferestrei PySimpleGUI
     window = psg.Window('HelloWorld', layout, size=(700, 700))
