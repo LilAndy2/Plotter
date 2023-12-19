@@ -23,7 +23,7 @@ points_x = None
 points_y = None
 
 #TODO remove these at the end
-points = [(1,2), (2,6) ,(1,7)]
+points = [(1,2), (2,6) ,(1,7), (5,11)]
 points_x = [x for x,y in points]
 points_y = [y for x,y in points]
 
@@ -306,8 +306,18 @@ def extrapolate_point():
     pass
 
 def display_dataset():
-    pass
-    
+    global points
+    points_x = [x for x,y in points]
+    points_y = [y for x,y in points]
+    rows = list(zip(points_x, points_y))
+    top_row = ['X', 'Y']
+    dataset_layout = [
+        [psg.Table(values=rows, headings=top_row, justification='center', background_color= 'white', text_color=layout_text_color, auto_size_columns=False, col_widths=[5,5])],
+    ]
+    dataset_window = psg.Window('Dataset', dataset_layout, size=(200, 200), background_color=layout_background_color)
+    event, values = dataset_window.read()
+    if event == 'Close':
+        dataset_window.close()    
 
 def predict_next():
     pass
