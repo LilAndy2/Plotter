@@ -73,6 +73,8 @@ class ProcessorAPI:
 
     def get_polyfit_indices(self):
         self.pointCollection = Line(self.pointCollection.points)
+        if len(self.pointCollection.points) == 0:
+            return []
         if self.polyfitMode == 'default':
             self.pointCollection.__setPolyFitDefault__()
         elif self.polyfitMode == 'optimal':
@@ -118,3 +120,9 @@ class ProcessorAPI:
             self.pointCollection.__differentiate__(x)
         else:
             raise ValueError('Invalid mode')
+
+    def reset(self):
+        self.pointCollection = pc([])
+        self.mode = 'none'
+        self.polyfitMode = 'default'
+

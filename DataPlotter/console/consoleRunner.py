@@ -51,7 +51,11 @@ primary_layout = [
                    border_width=5),
         psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
-                       border_width=5)
+                       border_width=5),
+        psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
+                   button_color=button_background_color, mouseover_colors=button_highlight_color,
+                   font=text_font,
+                   border_width=5)
     ],
     [psg.Canvas(key='-CANVAS-', background_color='#ffffff', size=(500, 500))]
 ]
@@ -97,6 +101,10 @@ def updatePlot():
                        border_width=5),
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
+            psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color,
+                       font=text_font,
                        border_width=5)
         ],
         [psg.Canvas(key='-CANVAS-', background_color='#ffffff', size=(500, 500))]
@@ -116,11 +124,14 @@ def updatePlot():
 
 def lin_reg():
     global primary_window
-    indices = processor.get_polyfit_lin_reg()
-    slope = indices[1]
-    intercept = indices[0]
+    indices = []
+    slope = 0
+    intercept = 0
     if len(processor.get_points()) > 0:
         regression_text = "Linear Regression: " + str(round(slope, 3)) + "x + " + str(round(intercept, 3))
+        indices = processor.get_polyfit_lin_reg()
+        slope = indices[1]
+        intercept = indices[0]
     else:
         regression_text = "Cannot calculate linear regression, add at least one point"
     primary_layout = [
@@ -156,6 +167,10 @@ def lin_reg():
                        border_width=5),
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
+            psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color,
+                       font=text_font,
                        border_width=5)
         ],
         [psg.Canvas(key='-CANVAS-', background_color='#ffffff', size=(500, 500))],
@@ -221,6 +236,10 @@ def best_fit():
                        border_width=5),
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
+            psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color,
+                       font=text_font,
                        border_width=5)
         ],
         [psg.Canvas(key='-CANVAS-', background_color='#ffffff', size=(500, 500))],
@@ -308,6 +327,10 @@ def integrate():
                        border_width=5),
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
+            psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color,
+                       font=text_font,
                        border_width=5)
         ],
         [psg.Canvas(key='-CANVAS-', background_color='#ffffff', size=(500, 500))],
@@ -399,6 +422,10 @@ def extrapolate():
                 psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
                            button_color=button_background_color, mouseover_colors=button_highlight_color,
                            font=text_font,
+                           border_width=5),
+                psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
+                           button_color=button_background_color, mouseover_colors=button_highlight_color,
+                           font=text_font,
                            border_width=5)
             ],
             [psg.Canvas(key='-CANVAS-', background_color='#ffffff', size=(500, 500))],
@@ -410,18 +437,19 @@ def extrapolate():
                                     background_color=layout_background_color, location=(0, 0), finalize=True)
         fig = plt.Figure(figsize=(5, 4), dpi=100)
         ax = fig.add_subplot(111)
-        x = processor.get_x_array()
-        y = []
-        indices = processor.get_polyfit_indices()
-        for i in range(len(x)):
-            y.append(0)
-            for j in range(len(indices)):
-                y[i] += indices[j] * x[i] ** j
+        if len(processor.pointCollection.points) > 0:
+            x = processor.get_x_array()
+            y = []
+            indices = processor.get_polyfit_indices()
+            for i in range(len(x)):
+                y.append(0)
+                for j in range(len(indices)):
+                    y[i] += indices[j] * x[i] ** j
 
-        ax.plot(x, y, color='green', label='Best Fit Line')
-        ax.scatter(points_x, points_y, color=button_highlight_color, marker='o')
-        # plot the last point as a red dot
-        ax.scatter(float(values[0]), processor.extrapolate(float(values[0])).y, color='red', marker='o')
+            ax.plot(x, y, color='green', label='Best Fit Line')
+            ax.scatter(points_x, points_y, color=button_highlight_color, marker='o')
+            # plot the last point as a red dot
+            ax.scatter(float(values[0]), processor.extrapolate(float(values[0])).y, color='red', marker='o')
         tkcanvas = draw_figure(primary_window['-CANVAS-'].TKCanvas, fig)
         popup_window.close()
 
@@ -461,6 +489,9 @@ def run():
             display_dataset()
         elif event == '-BUTTON_BEST_FIT-':
             best_fit()
+        elif event == '-BUTTON_RESET-':
+            processor.reset()
+            updatePlot()
 
     primary_window.close()
 
