@@ -166,7 +166,7 @@ def updatePlot():
     points_x = [x for x, y in points]
     points_y = [y for x, y in points]
     primary_window.close()
-    primary_window = psg.Window('Plotting', primary_layout, size=(700, 700), element_justification='center',
+    primary_window = psg.Window('Plotting', primary_layout, size=(1000, 1000), element_justification='center',
                                 background_color=layout_background_color, location=(0, 0), finalize=True)
     fig = plt.Figure(figsize=(5, 4), dpi=100)
     ax = fig.add_subplot(111)
@@ -229,7 +229,7 @@ def linear_regression():
                   text_color=layout_text_color, background_color=layout_background_color, border_width=5)]
     ]
     primary_window.close()
-    primary_window = psg.Window('Plotting', primary_layout, size=(700, 700), element_justification='center',
+    primary_window = psg.Window('Plotting', primary_layout, size=(1000, 1000), element_justification='center',
                                 background_color=layout_background_color, location=(0, 0), finalize=True)
     fig = plt.Figure(figsize=(5, 4), dpi=100)
     ax = fig.add_subplot(111)
@@ -319,7 +319,7 @@ def calculate_integral():
                   text_color=layout_text_color, background_color=layout_background_color, border_width=5)]
     ]
     primary_window.close()
-    primary_window = psg.Window('Plotting', primary_layout, size=(700, 700), element_justification='center',
+    primary_window = psg.Window('Plotting', primary_layout, size=(1000, 1000), element_justification='center',
                                 background_color=layout_background_color, location=(0, 0), finalize=True)
     fig = plt.Figure(figsize=(5, 4), dpi=100)
     ax = fig.add_subplot(111)
@@ -384,7 +384,7 @@ def calculate_derivative():
                   text_color=layout_text_color, background_color=layout_background_color, border_width=5)]
     ]
     primary_window.close()
-    primary_window = psg.Window('Plotting', primary_layout, size=(700, 700), element_justification='center',
+    primary_window = psg.Window('Plotting', primary_layout, size=(1000, 1000), element_justification='center',
                                 background_color=layout_background_color, location=(0, 0), finalize=True)
     fig = plt.Figure(figsize=(5, 4), dpi=100)
     ax = fig.add_subplot(111)
@@ -467,7 +467,7 @@ def extrapolate_point():
                       text_color=layout_text_color, background_color=layout_background_color, border_width=5)]
         ]
         primary_window.close()
-        primary_window = psg.Window('Plotting', primary_layout, size=(700, 700), element_justification='center',
+        primary_window = psg.Window('Plotting', primary_layout, size=(1000, 1000), element_justification='center',
                                     background_color=layout_background_color, location=(0, 0), finalize=True)
         fig = plt.Figure(figsize=(5, 4), dpi=100)
         ax = fig.add_subplot(111)
@@ -558,7 +558,7 @@ def predict_next():
                   text_color=layout_text_color, background_color=layout_background_color, border_width=5)]
     ]
     primary_window.close()
-    primary_window = psg.Window('Plotting', primary_layout, size=(700, 700), element_justification='center',
+    primary_window = psg.Window('Plotting', primary_layout, size=(1000, 1000), element_justification='center',
                                 background_color=layout_background_color, location=(0, 0), finalize=True)
     fig = plt.Figure(figsize=(5, 4), dpi=100)
     ax = fig.add_subplot(111)
@@ -574,7 +574,7 @@ def predict_next():
 
 def runner():
     global primary_window
-    primary_window = psg.Window('Proiect', primary_layout, size=(700, 700), element_justification='center',
+    primary_window = psg.Window('Proiect', primary_layout, size=(1000, 1000), element_justification='center',
                                 background_color=layout_background_color, location=(0, 0), finalize=True)
     fig = plt.Figure(figsize=(5, 4), dpi=100)
     ax = fig.add_subplot(111)

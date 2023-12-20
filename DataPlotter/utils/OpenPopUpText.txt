@@ -1,0 +1,8 @@
+Welcome to our new app, Plotit!
+
+Plotit is a lightweight app that allows you to visualize your data on a console.
+You can use it to plot your data in a simple and fast way. We support multiple types of plots, such as bar charts, line charts, scatter plots, and more.
+You can also use it to find the best fit for your data, using our regression tools (which can automatically detect the optimal regression) or predict the future values of your data using our forecasting tools.
+Using our tools, you can also find the integral between two points, or the derivative of a function.
+
+Thank you for choosing us, we hope you'll enjoy our app!

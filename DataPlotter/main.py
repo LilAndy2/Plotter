@@ -1,4 +1,4 @@
-import auxiliary
+from console import consoleRunner
 
 if __name__ == '__main__':
-   auxiliary.runner()
+   consoleRunner.run()
