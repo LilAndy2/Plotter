@@ -53,6 +53,9 @@ primary_layout = [
         psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
+        psg.Button('Find Extrem Points', key='-BUTTON_FIND_EXTREM-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
         psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
                    button_color=button_background_color, mouseover_colors=button_highlight_color,
                    font=text_font,
@@ -101,6 +104,9 @@ def updatePlot():
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
+            psg.Button('Find Extrem Points', key='-BUTTON_FIND_EXTREM-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
             psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
@@ -167,6 +173,9 @@ def lin_reg():
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
+            psg.Button('Find Extrem Points', key='-BUTTON_FIND_EXTREM-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
             psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
@@ -236,6 +245,9 @@ def best_fit():
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
+            psg.Button('Find Extrem Points', key='-BUTTON_FIND_EXTREM-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
             psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
@@ -329,6 +341,9 @@ def integrate():
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
+            psg.Button('Find Extrem Points', key='-BUTTON_FIND_EXTREM-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
             psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color,
                        font=text_font,
@@ -356,6 +371,21 @@ def integrate():
         ax.plot(x, y, color='green', label='Best Fit Line')
 
     tkcanvas = draw_figure(primary_window['-CANVAS-'].TKCanvas, fig)
+
+def find_extrem():
+
+    data = list(zip(processor.get_x_array(), processor.get_y_array()))
+    x_values, y_values = zip(*data)
+    max_value = max(y_values)
+    min_value = min(y_values)
+
+    max_points = [(x, y) for x, y in data if y == max_value]
+    min_points = [(x, y) for x, y in data if y == min_value]
+
+    extrema_text = f"Points of Maximum: {max_points}\nPoints of Minimum: {min_points}"
+    psg.popup(extrema_text, title='Extrema Points')
+
+    return max_points, min_points
 
 def display_dataset():
     rows = list(zip(processor.get_x_array(), processor.get_y_array()))
@@ -422,6 +452,10 @@ def extrapolate():
                            button_color=button_background_color, mouseover_colors=button_highlight_color,
                            font=text_font, border_width=5),
                 psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
+                           button_color=button_background_color, mouseover_colors=button_highlight_color,
+                           font=text_font,
+                           border_width=5),
+                psg.Button('Find Extrem Points', key='-BUTTON_FIND_EXTREM-', size=button_size,
                            button_color=button_background_color, mouseover_colors=button_highlight_color,
                            font=text_font,
                            border_width=5),
@@ -515,6 +549,10 @@ def derivative():
                            button_color=button_background_color, mouseover_colors=button_highlight_color,
                            font=text_font,
                            border_width=5),
+                psg.Button('Find Extrem Points', key='-BUTTON_FIND_EXTREM-', size=button_size,
+                           button_color=button_background_color, mouseover_colors=button_highlight_color,
+                           font=text_font,
+                           border_width=5),
                 psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
                            button_color=button_background_color, mouseover_colors=button_highlight_color,
                            font=text_font,
@@ -597,6 +635,9 @@ def predict():
                         button_color=button_background_color, mouseover_colors=button_highlight_color,
                         font=text_font,
                         border_width=5),
+            psg.Button('Find Extrem Points', key='-BUTTON_FIND_EXTREM-', size=button_size,
+                       button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                       border_width=5),
             psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color,
                        font=text_font,
@@ -654,6 +695,8 @@ def run():
             display_dataset()
         elif event == '-BUTTON_BEST_FIT-':
             best_fit()
+        elif event == '-BUTTON_FIND_EXTREM-':
+            find_extrem()
         elif event == '-BUTTON_RESET-':
             processor.reset()
             updatePlot()
