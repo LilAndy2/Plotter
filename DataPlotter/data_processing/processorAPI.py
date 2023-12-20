@@ -61,13 +61,16 @@ class ProcessorAPI:
         return self.mode
 
     def get_polyfit_set_order(self, order):
+        self.mode = 'line'
         if self.mode == 'line':
+            self.pointCollection = Line(self.pointCollection.points)
             self.pointCollection.__setPolyFit__(order)
             return self.pointCollection.__getPolyFit__()
         else:
             raise ValueError('Invalid mode')
 
     def get_polyfit_optimal(self):
+        self.mode = 'line'
         if self.mode == 'line':
             self.pointCollection = Line(self.pointCollection.points)
             self.pointCollection.__setPolyFitOptimal__()
@@ -84,12 +87,7 @@ class ProcessorAPI:
 
     def integrate(self, left, right, accuracy):
         self.pointCollection = Line(self.pointCollection.points)
-        if accuracy == "rough":
-            return self.pointCollection.__integrate__(left, right, self.pointCollection.points.length)
-        if accuracy == "medium":
-            return self.pointCollection.__integrate__(left, right, self.pointCollection.points.length * 10)
-        if accuracy == "precise":
-            return self.pointCollection.__integrate__(left, right, self.pointCollection.points.length * 100)
+        return self.pointCollection.__integrate__(left, right, len(self.pointCollection.points) * (10 ** (accuracy / 4)))
 
     def differentiate(self, x):
         if self.mode == 'line':

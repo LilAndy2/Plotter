@@ -37,7 +37,7 @@ class Line(PointCollection):
     def __extrapolate__(self, x):
         # calculate the point using the polynomial function
         y = 0
-        for i in range(10):
+        for i in range(len(self.polyFitIndices)):
             y += self.polyFitIndices[i] * x ** i
 
         return Point(x, y)
@@ -51,6 +51,8 @@ class Line(PointCollection):
 
         # get the polynomial indices
         self.polyFitIndices = np.polyfit(x, y, i)
+        # swap the polyFitIndices array
+        self.polyFitIndices = np.flip(self.polyFitIndices)
 
     def __getPolyFitOrder__(self):
         # get the order of the polynomial function
@@ -75,16 +77,20 @@ class Line(PointCollection):
         errors = []
         for i in range(10):
             self.__setPolyFit__(i)
+            if 0.1 > self.polyFitIndices[i] > -0.1:
+                return
             errors.append(self.__getPolyFitError__())
 
-        self.__setPolyFit__(np.argmin(errors))
+        # set the polyfit with the lowest error only if the highest order
+        # index is not close to 0
+        self.__setPolyFit__(errors.index(min(errors)))
 
     def __getPolyFitIntegral__(self, a, b, numParts):
         # calculate the integral of the polynomial function
         # break the interval into numParts parts
         # use the trapezoidal rule
         integral = 0
-        for i in range(numParts):
+        for i in range(round(numParts)):
             integral += ((self.__extrapolate__(a + i * (b - a) / numParts).y +
                          self.__extrapolate__(a + (i + 1) * (b - a) / numParts).y) *
                          (b - a) / numParts / 2)
