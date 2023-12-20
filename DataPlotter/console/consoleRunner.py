@@ -4,7 +4,6 @@ import PySimpleGUI as psg
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-
 # ASPECT VARIABLES
 layout_background_color = '#EBEBD3'
 layout_text_color = '#5c574f'
@@ -14,15 +13,14 @@ button_background_color = '#210B2C'
 button_highlight_color = '#55286F'
 button_size = (10, 2)
 
-
 # Global processor
 processor = ProcessorAPI()
-
 
 # Global layout for primary window
 primary_layout = [
     [
-        psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center', text_color=layout_text_color,
+        psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center',
+                 text_color=layout_text_color,
                  background_color=layout_background_color)
     ],
     [
@@ -51,8 +49,8 @@ primary_layout = [
                    button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                    border_width=5),
         psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
-                       button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
-                       border_width=5),
+                   button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
+                   border_width=5),
         psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
                    button_color=button_background_color, mouseover_colors=button_highlight_color,
                    font=text_font,
@@ -68,10 +66,12 @@ def draw_figure(canvas, figure):
     tkcanvas.get_tk_widget().pack(side='top', fill='both', expand=1)
     return tkcanvas
 
+
 def updatePlot():
     primary_layout = [
         [
-            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center',
+            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True,
+                     justification='center',
                      text_color=layout_text_color, background_color=layout_background_color, border_width=5)
         ],
         [
@@ -137,7 +137,8 @@ def lin_reg():
         regression_text = "Cannot calculate linear regression, add at least one point"
     primary_layout = [
         [
-            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center',
+            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True,
+                     justification='center',
                      text_color=layout_text_color, background_color=layout_background_color, border_width=5)
         ],
         [
@@ -184,7 +185,8 @@ def lin_reg():
     fig = plt.Figure(figsize=(5, 4), dpi=100)
     ax = fig.add_subplot(111)
     ax.scatter(processor.get_x_array(), processor.get_y_array(), color=button_highlight_color, marker='o')
-    ax.plot(processor.get_x_array(), slope * processor.get_x_array() + intercept, color='green', label='Regression Line')
+    ax.plot(processor.get_x_array(), slope * processor.get_x_array() + intercept, color='green',
+            label='Regression Line')
     tkcanvas = draw_figure(primary_window['-CANVAS-'].TKCanvas, fig)
 
 
@@ -206,7 +208,8 @@ def best_fit():
         best_fit_text = "Best fit has order " + str(order) + "."
     primary_layout = [
         [
-            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center',
+            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True,
+                     justification='center',
                      text_color=layout_text_color, background_color=layout_background_color, border_width=5)
         ],
         [
@@ -297,7 +300,8 @@ def integrate():
 
     primary_layout = [
         [
-            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center',
+            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True,
+                     justification='center',
                      text_color=layout_text_color, background_color=layout_background_color, border_width=5)
         ],
         [
@@ -357,6 +361,7 @@ def integrate():
 
     tkcanvas = draw_figure(primary_window['-CANVAS-'].TKCanvas, fig)
 
+
 def display_dataset():
     rows = list(zip(processor.get_x_array(), processor.get_y_array()))
     top_row = ['X', 'Y']
@@ -368,6 +373,7 @@ def display_dataset():
     event, values = dataset_window.read()
     if event == 'Close':
         dataset_window.close()
+
 
 def extrapolate():
     global primary_window
@@ -391,7 +397,8 @@ def extrapolate():
             y_text = "Cannot extrapolate point, add at least one point"
         primary_layout = [
             [
-                psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center',
+                psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True,
+                         justification='center',
                          text_color=layout_text_color, background_color=layout_background_color, border_width=5)
             ],
             [
@@ -460,6 +467,7 @@ def extrapolate():
     elif event == 'Cancel':
         popup_window.close()
 
+
 def derivative():
     global primary_window
     points_x = processor.get_x_array()
@@ -481,7 +489,8 @@ def derivative():
             y_text = "Cannot calculate derivative, add at least one point"
         primary_layout = [
             [
-                psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center',
+                psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True,
+                         justification='center',
                          text_color=layout_text_color, background_color=layout_background_color, border_width=5)
             ],
             [
@@ -564,7 +573,8 @@ def predict():
 
     primary_layout = [
         [
-            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True, justification='center',
+            psg.Text(text='Plotit - Your one and only data plotter', font=title_font, expand_x=True,
+                     justification='center',
                      text_color=layout_text_color, background_color=layout_background_color, border_width=5)
         ],
         [
@@ -594,9 +604,9 @@ def predict():
                        button_color=button_background_color, mouseover_colors=button_highlight_color, font=text_font,
                        border_width=5),
             psg.Button('Automatic Best Fit', key='-BUTTON_BEST_FIT-', size=button_size,
-                        button_color=button_background_color, mouseover_colors=button_highlight_color,
-                        font=text_font,
-                        border_width=5),
+                       button_color=button_background_color, mouseover_colors=button_highlight_color,
+                       font=text_font,
+                       border_width=5),
             psg.Button('Reset', key='-BUTTON_RESET-', size=button_size,
                        button_color=button_background_color, mouseover_colors=button_highlight_color,
                        font=text_font,
@@ -629,7 +639,8 @@ def run():
                                 background_color=layout_background_color, location=(0, 0), finalize=True)
     fig = plt.Figure(figsize=(5, 4), dpi=100)
     ax = fig.add_subplot(111)
-    ax.scatter(processor.get_x_array(), processor.get_y_array(), color=button_highlight_color, marker='o', label='Points')
+    ax.scatter(processor.get_x_array(), processor.get_y_array(), color=button_highlight_color, marker='o',
+               label='Points')
     tkcanvas = draw_figure(primary_window['-CANVAS-'].TKCanvas, fig)
 
     while True:
@@ -659,6 +670,7 @@ def run():
             updatePlot()
 
     primary_window.close()
+
 
 if __name__ == 'main':
     run()
