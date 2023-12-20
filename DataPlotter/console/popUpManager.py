@@ -1,6 +1,5 @@
 import PySimpleGUI as psg
 from data_processing.point import Point
-from data_processing.processorAPI import ProcessorAPI
 from console import consoleRunner
 
 # ASPECT VARIABLES
@@ -72,7 +71,8 @@ def removePointPopUp(processor):
 
     if event == 'OK':
         x, y = float(values[0]), float(values[1])
-        processor.remove_point(Point(x, y))
+        if processor.pointCollection.points.count(Point(x, y)) > 0:
+            processor.remove_point(Point(x, y))
         # Actualizați și afișați graficul în timp real în fereastra principală
         consoleRunner.updatePlot()
         popup_window.close()

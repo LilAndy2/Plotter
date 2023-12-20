@@ -1,5 +1,6 @@
 from data_processing.PointCollection import PointCollection as pc
 from data_processing.line import Line
+from data_processing.point import Point
 
 
 class ProcessorAPI:
@@ -111,15 +112,28 @@ class ProcessorAPI:
     def integrate(self, left, right, accuracy):
         self.pointCollection = Line(self.pointCollection.points)
         self.mode = 'line'
+        if len(self.pointCollection.points) == 0 or left >= right:
+            return 0
         self.get_polyfit_optimal()
         return self.pointCollection.__integrate__(left, right, len(self.pointCollection.points) * (accuracy * 10))
 
     def differentiate(self, x):
+        self.mode = 'line'
         if self.mode == 'line':
             self.pointCollection = Line(self.pointCollection.points)
-            self.pointCollection.__differentiate__(x)
+            if self.polyfitMode == 'default':
+                self.pointCollection.__setPolyFitDefault__()
+            elif self.polyfitMode == 'optimal':
+                self.pointCollection.__setPolyFitOptimal__()
+            return self.pointCollection.__differentiate__(x)
         else:
             raise ValueError('Invalid mode')
+
+    def predict_next(self):
+        self.pointCollection = Line(self.pointCollection.points)
+        if len(self.pointCollection.points) == 0:
+            return Point(0, 0)
+        return self.pointCollection.__predictNext__()
 
     def reset(self):
         self.pointCollection = pc([])

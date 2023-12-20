@@ -1,5 +1,3 @@
-# define a class for a collection of 2d points
-
 import numpy as np
 from data_processing.point import Point
 

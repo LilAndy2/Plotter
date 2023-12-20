@@ -1,5 +1,3 @@
-# define a class for a 2d point
-
 import numpy as np
 
 
@@ -53,3 +51,6 @@ class Point:
 
     def __ge__(self, other):
         return abs(self) >= abs(other)
+
+    def toTuple(self):
+        return self.x, self.y

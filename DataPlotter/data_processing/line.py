@@ -1,6 +1,5 @@
-# define a line class to extend pointcollection and have a vector of 10 indices to represent it as a polynomial func
-
 import numpy as np
+from sklearn.linear_model import LinearRegression
 from scipy import integrate
 
 from data_processing.point import Point
@@ -114,3 +113,19 @@ class Line(PointCollection):
 
     def __differentiate__(self, x):
         return self.__getPolyFitDerivative__(x)
+
+    def __predictNext__(self):
+        # predict next point using sk
+        y = np.array([point.toTuple() for point in self.points])
+        X = np.arange(1, len(self.points) + 1).reshape(-1, 1)
+
+        # Create a linear regressor
+        regressor = LinearRegression()
+
+        # Train the model
+        regressor.fit(X, y)
+
+        # Predict the next point
+        next_point = regressor.predict([[len(self.points) + 1]])[0]
+
+        return Point(next_point[0], next_point[1])
