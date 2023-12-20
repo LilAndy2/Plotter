@@ -52,3 +52,6 @@ class PointCollection:
 
     def __getYArray__(self):
         return np.array([point.y for point in self.points])
+
+    def __sortPoints__(self):
+        self.points.sort(key=lambda point: point.x)

@@ -1,6 +1,8 @@
 # define a line class to extend pointcollection and have a vector of 10 indices to represent it as a polynomial func
 
 import numpy as np
+from scipy import integrate
+
 from data_processing.point import Point
 from data_processing.PointCollection import PointCollection
 
@@ -40,6 +42,7 @@ class Line(PointCollection):
         for i in range(len(self.polyFitIndices)):
             y += self.polyFitIndices[i] * x ** i
 
+        print(x, y, len(self.polyFitIndices))
         return Point(x, y)
 
     def __setPolyFit__(self, i):
@@ -86,15 +89,16 @@ class Line(PointCollection):
         self.__setPolyFit__(errors.index(min(errors)))
 
     def __getPolyFitIntegral__(self, a, b, numParts):
-        # calculate the integral of the polynomial function
-        # break the interval into numParts parts
-        # use the trapezoidal rule
-        integral = 0
-        for i in range(round(numParts)):
-            integral += ((self.__extrapolate__(a + i * (b - a) / numParts).y +
-                         self.__extrapolate__(a + (i + 1) * (b - a) / numParts).y) *
-                         (b - a) / numParts / 2)
+        x = np.linspace(a, b, round(numParts))
+        y = np.zeros(len(x))
+        for i in range(len(x)):
+            y[i] = self.__extrapolate__(x[i]).y
 
+        print(x, y)
+        integral = integrate.trapezoid(y, x)
+
+
+        print(integral)
         return integral
 
     def __getPolyFitDerivative__(self, x):

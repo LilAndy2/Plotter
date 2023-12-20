@@ -1,12 +1,12 @@
 from data_processing.PointCollection import PointCollection as pc
 from data_processing.line import Line
-from data_processing.DTM import DTM
 
 
 class ProcessorAPI:
     def __init__(self):
         self.pointCollection = pc([])
         self.mode = 'none'
+        self.polyfitMode = 'default'
 
     def __str__(self):
         return f'ProcessorAPI({self.pointCollection})'
@@ -32,10 +32,12 @@ class ProcessorAPI:
     # add a point to the collection
     def add_point(self, point):
         self.pointCollection.__addPoint__(point)
+        self.pointCollection.__sortPoints__()
 
     # add a list of points to the collection
     def add_list_points(self, points):
         self.pointCollection.__addPoints__(points)
+        self.pointCollection.__sortPoints__()
 
     # remove a point from the collection
     def remove_point(self, point):
@@ -69,8 +71,22 @@ class ProcessorAPI:
         else:
             raise ValueError('Invalid mode')
 
+    def get_polyfit_indices(self):
+        self.pointCollection = Line(self.pointCollection.points)
+        if self.polyfitMode == 'default':
+            self.pointCollection.__setPolyFitDefault__()
+        elif self.polyfitMode == 'optimal':
+            self.pointCollection.__setPolyFitOptimal__()
+        return self.pointCollection.polyFitIndices
+
+    def get_polyfit_lin_reg(self):
+        self.mode = 'line'
+        self.polyfitMode = 'default'
+        return self.get_polyfit_set_order(1)
+
     def get_polyfit_optimal(self):
         self.mode = 'line'
+        self.polyfitMode = 'optimal'
         if self.mode == 'line':
             self.pointCollection = Line(self.pointCollection.points)
             self.pointCollection.__setPolyFitOptimal__()
@@ -79,15 +95,22 @@ class ProcessorAPI:
             raise ValueError('Invalid mode')
 
     def extrapolate(self, x):
+        self.mode = 'line'
         if self.mode == 'line':
             self.pointCollection = Line(self.pointCollection.points)
+            if self.polyfitMode == 'default':
+                self.pointCollection.__setPolyFitDefault__()
+            elif self.polyfitMode == 'optimal':
+                self.pointCollection.__setPolyFitOptimal__()
             return self.pointCollection.__extrapolate__(x)
         else:
             raise ValueError('Invalid mode')
 
     def integrate(self, left, right, accuracy):
         self.pointCollection = Line(self.pointCollection.points)
-        return self.pointCollection.__integrate__(left, right, len(self.pointCollection.points) * (10 ** (accuracy / 4)))
+        self.mode = 'line'
+        self.get_polyfit_optimal()
+        return self.pointCollection.__integrate__(left, right, len(self.pointCollection.points) * (accuracy * 10))
 
     def differentiate(self, x):
         if self.mode == 'line':
