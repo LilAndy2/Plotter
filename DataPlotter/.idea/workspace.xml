@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e584316-44b9-41c3-9d62-0dc8e0165639" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auxiliary.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/consoleRunner.py" beforeDir="false" afterPath="$PROJECT_DIR$/console/consoleRunner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/popUpManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/console/popUpManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_processing/PointCollection.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/PointCollection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_processing/line.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/line.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_processing/point.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/point.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_processing/processorAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/processorAPI.py" afterDir="false" />
-    </list>
+    <list default="true" id="5e584316-44b9-41c3-9d62-0dc8e0165639" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +40,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "settings.editor.selected.configurable": "editor.preferences.smartKeys",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -128,7 +119,7 @@
       <updated>1702486088172</updated>
       <workItem from="1702486090108" duration="3752000" />
       <workItem from="1702491289374" duration="11067000" />
-      <workItem from="1703018246194" duration="18438000" />
+      <workItem from="1703018246194" duration="18748000" />
     </task>
     <servers />
   </component>
