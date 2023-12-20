@@ -1,4 +1,5 @@
 import PySimpleGUI as psg
+import numpy as np
 from data_processing.point import Point
 from console import consoleRunner
 
@@ -77,4 +78,3 @@ def removePointPopUp(processor):
         consoleRunner.updatePlot()
         popup_window.close()
     return None
-

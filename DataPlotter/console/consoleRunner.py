@@ -12,7 +12,7 @@ title_font = ('Roboto', 20, 'bold')
 text_font = 'Roboto'
 button_background_color = '#210B2C'
 button_highlight_color = '#55286F'
-button_size = (10, 2)
+button_size = (10, 1)
 
 
 # Global processor
@@ -661,6 +661,10 @@ def predict():
         pass
     tkcanvas = draw_figure(primary_window['-CANVAS-'].TKCanvas, fig)
 
+
+def populate_distribution():
+    # popup for normal distribution
+    popUp.populateNormal(processor)
 
 def run():
     popUp.welcomePopUp()
